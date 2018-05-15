@@ -2,12 +2,21 @@ import React from 'react';
 import { StyleSheet, Text, TextInput, View, AsyncStorage } from 'react-native';
 import { Container, Header, Title, Content, List, Button, ListItem, Left, Body, Right, Icon } from 'native-base';
 import AddNote from './AddNote.js';
-
+import { Font, AppLoading } from "expo";
+import Expo from "expo";
 
 
 export default class Home extends React.Component {
     state = {
-        'Heading': ''
+        'Heading': '',
+        'loading': true,
+    }
+    async componentWillMount() {
+        await Font.loadAsync({
+            Roboto: require("native-base/Fonts/Roboto.ttf"),
+            Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf")
+        });
+        this.setState({ loading: false });
     }
 
     componentDidMount = () => AsyncStorage.getItem('name').then((value) => this.setState({ 'Heading': value }))
@@ -18,10 +27,13 @@ export default class Home extends React.Component {
     }
 
     render() {
+        if (this.state.loading) {
+            return <Expo.AppLoading />;
+        }
 
         const { navigate } = this.props.navigation;
         var noteArray = ['first note', 'second note', 'third note'];
-        
+
         return (
             <Container>
                 <Header>
@@ -30,7 +42,7 @@ export default class Home extends React.Component {
                     </Body>
                     <Right>
                         <Button transparent >
-                            <Icon name='ios-add' onPress={() =>navigate('AddNote')} />
+                            <Icon name='ios-add' onPress={() => navigate('AddNote')} />
                         </Button>
                     </Right>
                 </Header>

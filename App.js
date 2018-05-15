@@ -5,6 +5,8 @@ import AddNote from './AddNote.js';
 import { StackNavigator, createStackNavigator } from 'react-navigation';
 import Home from './Home';
 
+
+
 export default class App extends React.Component {
 
   render() {
