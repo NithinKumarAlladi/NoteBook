@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { AsyncStorage, Text, View, TextInput, StyleSheet } from 'react-native'
-import { Container, Content, Header } from 'native-base';
+import { Container, Content, Header, Body, Title } from 'native-base';
 
 export default class AddNote extends Component {
 
